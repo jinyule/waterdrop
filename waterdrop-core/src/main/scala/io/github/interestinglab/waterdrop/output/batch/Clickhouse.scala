@@ -134,7 +134,7 @@ class Clickhouse extends BaseOutput {
       this.cluster = config.getString("cluster")
 
       this.clusterInfo = getClickHouseClusterInfo(conn, cluster)
-      if (this.clusterInfo.size == 0) {
+      if (this.clusterInfo.isEmpty) {
         val errorInfo = s"cloud not find cluster config in system.clusters, config cluster = $cluster"
         logError(errorInfo)
         throw new RuntimeException(errorInfo)
@@ -161,7 +161,7 @@ class Clickhouse extends BaseOutput {
 
     df.foreachPartition { iter =>
       var jdbcUrl = this.jdbcLink
-      if (this.clusterInfo != null && this.clusterInfo.size > 0) {
+      if (this.clusterInfo != null && this.clusterInfo.nonEmpty) {
         //using random policy to select shard when insert data
         val randomShard = (Math.random() * this.clusterInfo.size).asInstanceOf[Int]
         val shardInfo = this.clusterInfo.get(randomShard)

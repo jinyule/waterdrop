@@ -89,7 +89,7 @@
         <!-- org.apache.commons/commons-lang3/-->
         <commons-lang3.version>3.11</commons-lang3.version>
         <!-- org.apache.commons/commons-pool2/-->
-        <commons-pool2.version>2.6.2</commons-pool2.version>
+        <commons-pool2.version>2.9.0</commons-pool2.version>
         <datanucleus-core.version>4.1.17</datanucleus-core.version>
         <guava.version>14.0.1</guava.version>
         <janino.version>3.0.16</janino.version>
@@ -171,6 +171,24 @@
         <univocity-parsers.version>2.9.1</univocity-parsers.version>
         <jaxb-runtime.version>2.3.2</jaxb-runtime.version>
         <pmml-model.version>1.4.8</pmml-model.version>
+        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <jline.version>2.14.6</jline.version>
+        <scalatest_2.12.version>3.2.3</scalatest_2.12.version>
+        <jedis.version>3.5.1</jedis.version>
+        <spark-xml_2.12.version>0.9.0</spark-xml_2.12.version>
+        <clickhouse-jdbc.version>0.2.5</clickhouse-jdbc.version>
+        <tikv-client.version>2.3.9</tikv-client.version>
+        <tispark-core.version>2.2.0</tispark-core.version>
+        <scopt_2.12.version>4.0.0</scopt_2.12.version>
+        <elasticsearch-spark-20_2.11.version>7.6.2</elasticsearch-spark-20_2.11.version>
+        <grok.version>0.1.5</grok.version>
+        <druid.version>1.2.4</druid.version>
+        <fastjson.version>1.2.72</fastjson.version>
+        <QLExpress.version>3.2.4</QLExpress.version>
+        <kudu-spark2_2.11.version>1.9.0</kudu-spark2_2.11.version>
+        <mongo-spark-connector_2.12.version>3.0.1</mongo-spark-connector_2.12.version>
+        <mongodb-driver.version>3.4.2</mongodb-driver.version>
+        <mongo-spark-connector_2.11.version>2.2.0</mongo-spark-connector_2.11.version>
     </properties>
 
     <dependencyManagement>
@@ -194,6 +212,21 @@
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-hive_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming-kafka-0-10_${scala.binary.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_${scala.binary.version}</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.twitter</groupId>
@@ -615,6 +648,26 @@
                 <version>${fasterxml.jackson.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-paranamer</artifactId>
+                <version>2.11.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-guava</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jsonSchema</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-server</artifactId>
                 <version>${jersey.version}</version>
@@ -734,12 +787,102 @@
             <dependency>
                 <groupId>jline</groupId>
                 <artifactId>jline</artifactId>
-                <version>2.14.6</version>
+                <version>${jline.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb.spark</groupId>
+                <artifactId>mongo-spark-connector_${scala.binary.version}</artifactId>
+                <version>${mongo-spark-connector_2.12.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb.spark</groupId>
+                <artifactId>mongo-spark-connector_2.11</artifactId>
+                <version>${mongo-spark-connector_2.11.version}</version>
+            </dependency>
+            <!--<dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongodb-driver.version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-core</artifactId>
+                <version>${mongodb-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>bson</artifactId>
+                <version>${mongodb-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kudu</groupId>
+                <artifactId>kudu-spark2_2.11</artifactId>
+                <version>${kudu-spark2_2.11.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>QLExpress</artifactId>
+                <version>${QLExpress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.thekraken</groupId>
+                <artifactId>grok</artifactId>
+                <version>${grok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch-spark-20_2.11</artifactId>
+                <version>${elasticsearch-spark-20_2.11.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.scopt</groupId>
+                <artifactId>scopt_${scala.binary.version}</artifactId>
+                <version>${scopt_2.12.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingcap.tispark</groupId>
+                <artifactId>tispark-core</artifactId>
+                <version>${tispark-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingcap.tikv</groupId>
+                <artifactId>tikv-client</artifactId>
+                <version>${tikv-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ru.yandex.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.databricks</groupId>
+                <artifactId>spark-xml_${scala.binary.version}</artifactId>
+                <version>${spark-xml_2.12.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.scalatest</groupId>
                 <artifactId>scalatest_${scala.binary.version}</artifactId>
-                <version>3.2.3</version>
+                <version>${scalatest_2.12.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -822,7 +965,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.38</version>
+                <version>${mysql-connector-java.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -2827,10 +2970,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
