@@ -180,11 +180,10 @@ class Clickhouse extends BaseOutput {
       val executorConn = executorBalanced.getConnection.asInstanceOf[ClickHouseConnectionImpl]
       val statement = executorConn.createClickHousePreparedStatement(this.initSQL, ResultSet.TYPE_FORWARD_ONLY)
       var length = 0
-      while (iter.hasNext) {
-        val row = iter.next()
-        length += 1
 
-        renderStatement(fields, row, dfFields, statement)
+      iter.foreach {  item =>
+        length += 1
+        renderStatement(fields, item, dfFields, statement)
         statement.addBatch()
 
         if (length >= bulkSize) {
