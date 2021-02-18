@@ -93,9 +93,9 @@
         <lombok.version>1.18.0</lombok.version>
         <mysql.version>5.1.46</mysql.version>
         <waterdrop.version>2.0.0</waterdrop.version>
-        <skip.pmd.check>false</skip.pmd.check>
-        <maven.deploy.skip>false</maven.deploy.skip>
-        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <skip.pmd.check>true</skip.pmd.check>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
 
